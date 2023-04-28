@@ -30,27 +30,42 @@ namespace Pokemon
         private void InitializeComponent()
         {
             this.dgwPokemons = new System.Windows.Forms.DataGridView();
+            this.pbxpokemons = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwPokemons)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).BeginInit();
             this.SuspendLayout();
             // 
             // dgwPokemons
             // 
             this.dgwPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgwPokemons.Location = new System.Drawing.Point(33, 131);
+            this.dgwPokemons.Location = new System.Drawing.Point(12, 12);
             this.dgwPokemons.Name = "dgwPokemons";
+            this.dgwPokemons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgwPokemons.Size = new System.Drawing.Size(544, 209);
             this.dgwPokemons.TabIndex = 0;
+            this.dgwPokemons.SelectionChanged += new System.EventHandler(this.dgwPokemons_SelectionChanged);
+            // 
+            // pbxpokemons
+            // 
+            this.pbxpokemons.Location = new System.Drawing.Point(570, 12);
+            this.pbxpokemons.Name = "pbxpokemons";
+            this.pbxpokemons.Size = new System.Drawing.Size(208, 208);
+            this.pbxpokemons.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxpokemons.TabIndex = 1;
+            this.pbxpokemons.TabStop = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(806, 242);
+            this.Controls.Add(this.pbxpokemons);
             this.Controls.Add(this.dgwPokemons);
             this.Name = "Form1";
             this.Text = "Pestaña de Pokemons";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgwPokemons)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -58,6 +73,7 @@ namespace Pokemon
         #endregion
 
         private System.Windows.Forms.DataGridView dgwPokemons;
+        private System.Windows.Forms.PictureBox pbxpokemons;
     }
 }
 

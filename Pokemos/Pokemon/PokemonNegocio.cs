@@ -20,7 +20,7 @@ namespace Pokemon
             {
                 conexion.ConnectionString = "Server=.\\SQLEXPRESS; database= POKEDEX_DB; integrated security=true";
                 comando.CommandType = System.Data.CommandType.Text;
-                comando.CommandText = "SELECT Numero, Nombre, Descripcion from POKEMONS";
+                comando.CommandText = "SELECT p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, e.Descripcion as tipo, el.Descripcion as Debilidad from POKEMONS p INNER JOIN ELEMENTOS e on p.IdTipo=e.Id INNER JOIN ELEMENTOS el on el.Id=p.IdDebilidad";
                 comando.Connection = conexion;
                 conexion.Open();
                 lector = comando.ExecuteReader();
@@ -31,7 +31,14 @@ namespace Pokemon
                     obj.Numero = (int)lector["Numero"];
                     obj.Nombre = (string)lector["Nombre"];
                     obj.Descripcion = (string)lector["Descripcion"];
+                    obj.URLImagen = (string)lector["URLImagen"];
 
+                    obj.Tipo = new Elemento();
+                    obj.Tipo.Descripcion = (string)lector["Tipo"];
+
+                    obj.Debilidad = new Elemento();
+                    obj.Debilidad.Descripcion = (string)lector["Debilidad"];
+                    
 
                     lista.Add(obj);
                 }

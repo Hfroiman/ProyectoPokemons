@@ -18,10 +18,31 @@ namespace Pokemon
 
         }
 
+        private List<Pokemon> ListaPokemon;
+
         private void Form1_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            dgwPokemons.DataSource = negocio.Listar();
+            ListaPokemon = negocio.Listar();
+            dgwPokemons.DataSource = ListaPokemon;
+            CargarImagen(ListaPokemon[0].URLImagen);
+        }
+
+        private void CargarImagen(string imagen) {
+            try
+            {
+                pbxpokemons.Load(imagen);
+            }
+            catch
+            {
+                pbxpokemons.Load("https://agroworldspain.com/img/noimage.png");
+            }
+        }
+
+        private void dgwPokemons_SelectionChanged(object sender, EventArgs e)
+        {
+            Pokemon seleccionado = (Pokemon)dgwPokemons.CurrentRow.DataBoundItem;
+            CargarImagen(seleccionado.URLImagen);
         }
     }
 }
