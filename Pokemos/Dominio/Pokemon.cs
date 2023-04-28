@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Pokemon
+namespace Dominio
 {
-    class Pokemon
+    public class pokemon
     {
         public int Numero { get; set; }
 

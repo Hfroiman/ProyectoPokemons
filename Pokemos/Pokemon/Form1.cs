@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Dominio;
 
 namespace Pokemon
 {
@@ -18,13 +19,14 @@ namespace Pokemon
 
         }
 
-        private List<Pokemon> ListaPokemon;
+        private List<pokemon> ListaPokemon;
 
         private void Form1_Load(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
             ListaPokemon = negocio.Listar();
             dgwPokemons.DataSource = ListaPokemon;
+            dgwPokemons.Columns["URLImagen"].Visible = false;
             CargarImagen(ListaPokemon[0].URLImagen);
         }
 
@@ -41,7 +43,7 @@ namespace Pokemon
 
         private void dgwPokemons_SelectionChanged(object sender, EventArgs e)
         {
-            Pokemon seleccionado = (Pokemon)dgwPokemons.CurrentRow.DataBoundItem;
+            pokemon seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
             CargarImagen(seleccionado.URLImagen);
         }
     }

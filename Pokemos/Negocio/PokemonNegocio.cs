@@ -4,14 +4,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
+using Dominio;
 
 namespace Pokemon
 {
-    class PokemonNegocio
+    public class PokemonNegocio
     {
-        public List<Pokemon> Listar()
+        public List<pokemon> Listar()
         {
-            List<Pokemon> lista = new List<Pokemon>();
+            List<pokemon> lista = new List<pokemon>();
             SqlConnection conexion = new SqlConnection();
             SqlCommand comando = new SqlCommand();
             SqlDataReader lector;
@@ -26,7 +27,7 @@ namespace Pokemon
                 lector = comando.ExecuteReader();
                 while (lector.Read())
                 {
-                    Pokemon obj = new Pokemon();
+                    pokemon obj = new pokemon();
 
                     obj.Numero = (int)lector["Numero"];
                     obj.Nombre = (string)lector["Nombre"];
