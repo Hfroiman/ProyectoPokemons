@@ -61,12 +61,13 @@ namespace Negocio
             ConexionBD datos = new ConexionBD();
             try
             {
-                datos.SetearConsulta("INSERT into POKEMONS (Numero, nombre, Descripcion, activo, IdTipo, IdDebilidad) VALUES (@num,@nomb,@descripcion,1, @idTipo, @Iddebilidad)");
+                datos.SetearConsulta("INSERT into POKEMONS (Numero, nombre, Descripcion, activo, IdTipo, IdDebilidad, UrlImagen) VALUES (@num,@nomb,@descripcion,1, @idTipo, @Iddebilidad, @UrlImagen)");
                 datos.setearparametro("@num",nuevo.Numero);
                 datos.setearparametro("@nomb",nuevo.Nombre);
                 datos.setearparametro("@descripcion", nuevo.Descripcion);
                 datos.setearparametro("@idTipo", nuevo.Tipo.Id);
                 datos.setearparametro("@Iddebilidad", nuevo.Debilidad.Id);
+                datos.setearparametro("@UrlImagen", nuevo.URLImagen);
                 datos.EjecutarAccion();
                 datos.CerraConexion();
             }
