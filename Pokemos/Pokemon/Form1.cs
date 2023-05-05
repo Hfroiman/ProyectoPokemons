@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Dominio;
+using Negocio;
 
 namespace Pokemon
 {
@@ -23,10 +24,16 @@ namespace Pokemon
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Cargar();
+        }
+
+        public void Cargar()
+        {
             PokemonNegocio negocio = new PokemonNegocio();
             ListaPokemon = negocio.Listar();
             dgwPokemons.DataSource = ListaPokemon;
             dgwPokemons.Columns["URLImagen"].Visible = false;
+            dgwPokemons.Columns["Id"].Visible = false;
             CargarImagen(ListaPokemon[0].URLImagen);
         }
 
@@ -45,6 +52,13 @@ namespace Pokemon
         {
             pokemon seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
             CargarImagen(seleccionado.URLImagen);
+        }
+
+        private void btnagregar_Click(object sender, EventArgs e)
+        {
+            FormAgregar agregar = new FormAgregar();
+            agregar.ShowDialog();
+            Cargar();
         }
     }
 }

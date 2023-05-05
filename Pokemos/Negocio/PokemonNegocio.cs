@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using Dominio;
 
-namespace Pokemon
+namespace Negocio
 {
     public class PokemonNegocio
     {
@@ -32,7 +32,10 @@ namespace Pokemon
                     obj.Numero = (int)lector["Numero"];
                     obj.Nombre = (string)lector["Nombre"];
                     obj.Descripcion = (string)lector["Descripcion"];
-                    obj.URLImagen = (string)lector["URLImagen"];
+
+                    if (!(lector["URLimagen"] is DBNull)) {
+                        obj.URLImagen = (string)lector["URLImagen"];
+                    }
 
                     obj.Tipo = new Elemento();
                     obj.Tipo.Descripcion = (string)lector["Tipo"];
@@ -50,6 +53,31 @@ namespace Pokemon
             {
 
                 throw ex;
+            }
+        }
+
+        public void AgregarPokemon(pokemon nuevo)
+        {
+            ConexionBD datos = new ConexionBD();
+            try
+            {
+                datos.SetearConsulta("INSERT into POKEMONS (Numero, nombre, Descripcion, activo, IdTipo, IdDebilidad) VALUES (@num,@nomb,@descripcion,1, @idTipo, @Iddebilidad)");
+                datos.setearparametro("@num",nuevo.Numero);
+                datos.setearparametro("@nomb",nuevo.Nombre);
+                datos.setearparametro("@descripcion", nuevo.Descripcion);
+                datos.setearparametro("@idTipo", nuevo.Tipo.Id);
+                datos.setearparametro("@Iddebilidad", nuevo.Debilidad.Id);
+                datos.EjecutarAccion();
+                datos.CerraConexion();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally
+            {
+                datos.CerraConexion();
             }
         }
     }
