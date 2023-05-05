@@ -24,6 +24,18 @@ namespace Pokemon
             Close();
         }
 
+        private void CargarImagen(string imagen)
+        {
+            try
+            {
+                pbxpokemons.Load(imagen);
+            }
+            catch
+            {
+                pbxpokemons.Load("https://agroworldspain.com/img/noimage.png");
+            }
+        }
+
         private void btnaceptar_Click(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
@@ -33,6 +45,7 @@ namespace Pokemon
                 obj.Numero = int.Parse(txtNumero.Text);
                 obj.Nombre = txtNombre.Text;
                 obj.Descripcion = txtDescripcion.Text;
+                obj.URLImagen = txtUrlimagen.Text;
                 obj.Tipo = (Elemento)cbxTipo.SelectedItem;
                 obj.Debilidad = (Elemento)cbxDebilidad.SelectedItem;
 
@@ -60,6 +73,11 @@ namespace Pokemon
 
                 throw ex;
             }
+        }
+
+        private void txtUrlimagen_Leave(object sender, EventArgs e)
+        {
+            CargarImagen(txtUrlimagen.Text);
         }
     }
 }

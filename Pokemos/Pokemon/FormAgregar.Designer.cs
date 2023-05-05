@@ -41,10 +41,10 @@ namespace Pokemon
             this.lblDebilidad = new System.Windows.Forms.Label();
             this.cbxTipo = new System.Windows.Forms.ComboBox();
             this.cbxDebilidad = new System.Windows.Forms.ComboBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.pbxpokemons = new System.Windows.Forms.PictureBox();
             this.btnaceptar = new System.Windows.Forms.Button();
             this.btncancelar = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).BeginInit();
             this.SuspendLayout();
             // 
             // lblNombre
@@ -105,6 +105,7 @@ namespace Pokemon
             this.txtUrlimagen.Name = "txtUrlimagen";
             this.txtUrlimagen.Size = new System.Drawing.Size(100, 20);
             this.txtUrlimagen.TabIndex = 8;
+            this.txtUrlimagen.Leave += new System.EventHandler(this.txtUrlimagen_Leave);
             // 
             // txtDescripcion
             // 
@@ -145,13 +146,14 @@ namespace Pokemon
             this.cbxDebilidad.Size = new System.Drawing.Size(121, 21);
             this.cbxDebilidad.TabIndex = 13;
             // 
-            // pictureBox1
+            // pbxpokemons
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(254, 28);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(232, 217);
-            this.pictureBox1.TabIndex = 14;
-            this.pictureBox1.TabStop = false;
+            this.pbxpokemons.Location = new System.Drawing.Point(254, 28);
+            this.pbxpokemons.Name = "pbxpokemons";
+            this.pbxpokemons.Size = new System.Drawing.Size(232, 217);
+            this.pbxpokemons.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pbxpokemons.TabIndex = 14;
+            this.pbxpokemons.TabStop = false;
             // 
             // btnaceptar
             // 
@@ -180,7 +182,7 @@ namespace Pokemon
             this.ClientSize = new System.Drawing.Size(504, 295);
             this.Controls.Add(this.btncancelar);
             this.Controls.Add(this.btnaceptar);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.pbxpokemons);
             this.Controls.Add(this.cbxDebilidad);
             this.Controls.Add(this.cbxTipo);
             this.Controls.Add(this.lblDebilidad);
@@ -196,7 +198,7 @@ namespace Pokemon
             this.Name = "FormAgregar";
             this.Text = "FormAgregar";
             this.Load += new System.EventHandler(this.FormAgregar_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -216,7 +218,7 @@ namespace Pokemon
         private System.Windows.Forms.Label lblDebilidad;
         private System.Windows.Forms.ComboBox cbxTipo;
         private System.Windows.Forms.ComboBox cbxDebilidad;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox pbxpokemons;
         private System.Windows.Forms.Button btnaceptar;
         private System.Windows.Forms.Button btncancelar;
     }
