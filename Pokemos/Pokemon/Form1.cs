@@ -60,5 +60,13 @@ namespace Pokemon
             agregar.ShowDialog();
             Cargar();
         }
+
+        private void btnmodificar_Click(object sender, EventArgs e)
+        {
+            pokemon seleccionado = new pokemon();
+            seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
+            FormAgregar modificar = new FormAgregar(seleccionado);
+            modificar.ShowDialog();
+        }
     }
 }

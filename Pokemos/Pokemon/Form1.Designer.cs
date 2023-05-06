@@ -32,6 +32,7 @@ namespace Pokemon
             this.dgwPokemons = new System.Windows.Forms.DataGridView();
             this.pbxpokemons = new System.Windows.Forms.PictureBox();
             this.btnagregar = new System.Windows.Forms.Button();
+            this.btnmodificar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgwPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).BeginInit();
             this.SuspendLayout();
@@ -40,8 +41,10 @@ namespace Pokemon
             // 
             this.dgwPokemons.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgwPokemons.Location = new System.Drawing.Point(12, 12);
+            this.dgwPokemons.MultiSelect = false;
             this.dgwPokemons.Name = "dgwPokemons";
             this.dgwPokemons.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgwPokemons.ShowEditingIcon = false;
             this.dgwPokemons.Size = new System.Drawing.Size(544, 209);
             this.dgwPokemons.TabIndex = 0;
             this.dgwPokemons.SelectionChanged += new System.EventHandler(this.dgwPokemons_SelectionChanged);
@@ -65,11 +68,22 @@ namespace Pokemon
             this.btnagregar.UseVisualStyleBackColor = true;
             this.btnagregar.Click += new System.EventHandler(this.btnagregar_Click);
             // 
+            // btnmodificar
+            // 
+            this.btnmodificar.Location = new System.Drawing.Point(102, 233);
+            this.btnmodificar.Name = "btnmodificar";
+            this.btnmodificar.Size = new System.Drawing.Size(75, 23);
+            this.btnmodificar.TabIndex = 3;
+            this.btnmodificar.Text = "Modificar";
+            this.btnmodificar.UseVisualStyleBackColor = true;
+            this.btnmodificar.Click += new System.EventHandler(this.btnmodificar_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(806, 268);
+            this.Controls.Add(this.btnmodificar);
             this.Controls.Add(this.btnagregar);
             this.Controls.Add(this.pbxpokemons);
             this.Controls.Add(this.dgwPokemons);
@@ -87,6 +101,7 @@ namespace Pokemon
         private System.Windows.Forms.DataGridView dgwPokemons;
         private System.Windows.Forms.PictureBox pbxpokemons;
         private System.Windows.Forms.Button btnagregar;
+        private System.Windows.Forms.Button btnmodificar;
     }
 }
 
