@@ -106,5 +106,37 @@ namespace Negocio
                 throw ex;
             }
         }
+        public void EliminacionFisica(int id)
+        {
+            ConexionBD datos = new ConexionBD();
+            try
+            {
+                datos.SetearConsulta("DELETE from POKEMONS where id=@Id");
+                datos.setearparametro("@Id", id);
+                datos.EjecutarAccion();
+                datos.CerraConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
+        public void eliminacionlogica(int id)
+        {
+            ConexionBD datos = new ConexionBD();
+            try
+            {
+                datos.SetearConsulta("UPDATE POKEMONS set activo=0 WHERE id=@Id");
+                datos.setearparametro("@Id", id);
+                datos.EjecutarAccion();
+                datos.CerraConexion();
+            }
+            catch (Exception ex)
+            {
+
+                throw ex;
+            }
+        }
     }
 }

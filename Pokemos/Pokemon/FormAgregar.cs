@@ -46,9 +46,11 @@ namespace Pokemon
         private void btnaceptar_Click(object sender, EventArgs e)
         {
             PokemonNegocio negocio = new PokemonNegocio();
-            
-            try
+
+            try 
             {
+                if (!(poke != null))
+                    poke = new pokemon();
                 poke.Numero = int.Parse(txtNumero.Text);
                 poke.Nombre = txtNombre.Text;
                 poke.Descripcion = txtDescripcion.Text;

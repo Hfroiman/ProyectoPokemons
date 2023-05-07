@@ -32,9 +32,14 @@ namespace Pokemon
             PokemonNegocio negocio = new PokemonNegocio();
             ListaPokemon = negocio.Listar();
             dgwPokemons.DataSource = ListaPokemon;
+            ocultarColumna();
+            CargarImagen(ListaPokemon[0].URLImagen);
+        }
+
+        public void ocultarColumna()
+        {
             dgwPokemons.Columns["URLImagen"].Visible = false;
             dgwPokemons.Columns["Id"].Visible = false;
-            CargarImagen(ListaPokemon[0].URLImagen);
         }
 
         private void CargarImagen(string imagen) {
@@ -67,6 +72,66 @@ namespace Pokemon
             seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
             FormAgregar modificar = new FormAgregar(seleccionado);
             modificar.ShowDialog();
+        }
+
+        private void btneliminacionfisica_Click(object sender, EventArgs e)
+        {
+            eliminar();
+        }
+
+        private void btneliminarlogico_Click(object sender, EventArgs e)
+        {
+            eliminar(true);
+        }
+
+        private void eliminar(bool logico = false)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            pokemon seleccionado = new pokemon();
+            try
+            {
+            DialogResult msj = MessageBox.Show("De verdad quieres eliminarlo?","Eliminado", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                if (msj == DialogResult.Yes)
+                {
+                    if (logico==false)
+                    {
+                    seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
+                    negocio.EliminacionFisica(seleccionado.Id);
+                    MessageBox.Show("Pokemon Eliminado correctamente..");
+                    }
+                    else
+                    {
+                    seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
+                    negocio.eliminacionlogica(seleccionado.Id);
+                    MessageBox.Show("Pokemon Eliminado correctamente..");    
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+            finally
+            {
+                Cargar();
+            }
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            List<pokemon> listafiltrada;
+            string filtro = txtfiltro.Text;
+            if (filtro!="")
+            {
+                listafiltrada = ListaPokemon.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }
+            else
+            {
+                listafiltrada = ListaPokemon;
+            }
+            dgwPokemons.DataSource = null;
+            dgwPokemons.DataSource = listafiltrada;
+            ocultarColumna();
         }
     }
 }
