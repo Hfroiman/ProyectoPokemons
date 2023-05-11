@@ -25,6 +25,10 @@ namespace Pokemon
         private void Form1_Load(object sender, EventArgs e)
         {
             Cargar();
+            cbxCampo.Items.Add("Numero");
+            cbxCampo.Items.Add("Nombre");
+            cbxCampo.Items.Add("Descripcion");
+
         }
 
         public void Cargar()
@@ -68,6 +72,7 @@ namespace Pokemon
 
         private void btnmodificar_Click(object sender, EventArgs e)
         {
+            //Agregar validacion
             pokemon seleccionado = new pokemon();
             seleccionado = (pokemon)dgwPokemons.CurrentRow.DataBoundItem;
             FormAgregar modificar = new FormAgregar(seleccionado);
@@ -117,21 +122,109 @@ namespace Pokemon
             }
         }
 
-        private void btnbuscar_Click(object sender, EventArgs e)
+        private void txtfiltro_TextChanged(object sender, EventArgs e)
         {
-            List<pokemon> listafiltrada;
+            List<pokemon> listaresumida;
             string filtro = txtfiltro.Text;
-            if (filtro!="")
+            if (filtro.Length >= 3)
             {
-                listafiltrada = ListaPokemon.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+                listaresumida = ListaPokemon.FindAll(x => x.Nombre.ToUpper().Contains(filtro.ToUpper()) || x.Tipo.Descripcion.ToUpper().Contains(filtro.ToUpper()));
+            }else
+            {
+                listaresumida = ListaPokemon;
+            }
+            dgwPokemons.DataSource = null;
+            dgwPokemons.DataSource = listaresumida;
+            ocultarColumna();
+        }
+
+        private void cbxCampo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string seleccionado = cbxCampo.Text.ToString();
+            if (seleccionado=="Numero")
+            {
+                cbxcriterio.Items.Clear();
+                cbxcriterio.Items.Add("Menor que");
+                cbxcriterio.Items.Add("Igual que");
+                cbxcriterio.Items.Add("Mayor que");
             }
             else
             {
-                listafiltrada = ListaPokemon;
+                if (seleccionado == "Nombre")
+                {
+                    cbxcriterio.Items.Clear();
+                    cbxcriterio.Items.Add("Empieza con");
+                    cbxcriterio.Items.Add("Termina con");
+                    cbxcriterio.Items.Add("Posee");
+                }
+                else
+                {
+                    cbxcriterio.Items.Clear();
+                    cbxcriterio.Items.Add("Empieza con");
+                    cbxcriterio.Items.Add("Termina con");
+                    cbxcriterio.Items.Add("Posee");
+                }
             }
-            dgwPokemons.DataSource = null;
-            dgwPokemons.DataSource = listafiltrada;
-            ocultarColumna();
+        }
+
+        private bool filtrovalido()
+        {
+            if (cbxCampo.SelectedIndex<0)
+            {
+                MessageBox.Show("Debes cargar el campo para poder filtrar. ");
+                return false;
+            }
+            if (cbxcriterio.SelectedIndex<0)
+            {
+                MessageBox.Show("Debes cargar el criterio para poder filtrar. ");
+                return false;
+            }
+            if (cbxCampo.SelectedIndex == 0 && txtFiltrorapido.Text=="" )
+            {
+                MessageBox.Show("Debes cargar algun numero para poder filtrar. ");
+                return false;
+            }
+            if (cbxCampo.SelectedIndex == 0)
+            {
+                if (!(solonumeros(txtFiltrorapido.Text.ToString())))
+                {
+                    MessageBox.Show("Debes cargar unicamente numeros para poder filtrar. ");
+                    return false;
+                }
+            }
+            return true;
+        }
+        private bool solonumeros(string cadena)
+        {
+            foreach (char caracter in cadena)
+            {
+                if (!(char.IsNumber(caracter)))
+                    return false;
+            }
+            return true;
+        }
+
+        private void btnbuscar_Click(object sender, EventArgs e)
+        {
+            PokemonNegocio negocio = new PokemonNegocio();
+            bool ok = filtrovalido();
+            if (ok==false)
+            {
+                return;
+            }
+            try
+            {
+            string criterio = cbxcriterio.Text.ToString();
+            string campo = cbxCampo.Text;
+            string filtrar = txtFiltrorapido.Text.ToString();
+            dgwPokemons.DataSource = negocio.Filtrar(criterio, campo, filtrar);
+            
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.ToString());
+            }
+                        
         }
     }
 }

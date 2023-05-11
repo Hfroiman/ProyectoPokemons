@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -15,6 +17,7 @@ namespace Pokemon
     public partial class FormAgregar : Form
     {
         pokemon poke= null;
+        private OpenFileDialog archivo = null;
         public FormAgregar()
         {
             InitializeComponent();
@@ -114,6 +117,31 @@ namespace Pokemon
         private void txtUrlimagen_Leave(object sender, EventArgs e)
         {
             CargarImagen(txtUrlimagen.Text);
+        }
+
+        private void btncargaimagen_Click(object sender, EventArgs e)
+        {
+            archivo = new OpenFileDialog();
+            try
+            {
+
+            archivo.Filter = "jpg|*.jpg;|png|*.png";
+            if (archivo.ShowDialog()==DialogResult.OK)
+            {
+                txtUrlimagen.Text = archivo.FileName;
+                CargarImagen(txtUrlimagen.Text);
+
+            }
+            if (archivo!=null && !(txtUrlimagen.Text.ToUpper().Contains("HTTP")))
+            {
+                File.Copy(archivo.FileName, ConfigurationManager.AppSettings["Images-folder"]+archivo.SafeFileName);
+            }
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
         }
     }
 }

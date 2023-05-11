@@ -38,6 +38,12 @@ namespace Pokemon
             this.btnbuscar = new System.Windows.Forms.Button();
             this.lblfiltro = new System.Windows.Forms.Label();
             this.txtfiltro = new System.Windows.Forms.TextBox();
+            this.lblcampo = new System.Windows.Forms.Label();
+            this.lblcriterio = new System.Windows.Forms.Label();
+            this.lblfiltrorapido = new System.Windows.Forms.Label();
+            this.txtFiltrorapido = new System.Windows.Forms.TextBox();
+            this.cbxCampo = new System.Windows.Forms.ComboBox();
+            this.cbxcriterio = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgwPokemons)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbxpokemons)).BeginInit();
             this.SuspendLayout();
@@ -105,7 +111,7 @@ namespace Pokemon
             // 
             // btnbuscar
             // 
-            this.btnbuscar.Location = new System.Drawing.Point(243, 32);
+            this.btnbuscar.Location = new System.Drawing.Point(570, 319);
             this.btnbuscar.Name = "btnbuscar";
             this.btnbuscar.Size = new System.Drawing.Size(75, 23);
             this.btnbuscar.TabIndex = 6;
@@ -128,12 +134,72 @@ namespace Pokemon
             this.txtfiltro.Name = "txtfiltro";
             this.txtfiltro.Size = new System.Drawing.Size(175, 20);
             this.txtfiltro.TabIndex = 8;
+            this.txtfiltro.TextChanged += new System.EventHandler(this.txtfiltro_TextChanged);
+            // 
+            // lblcampo
+            // 
+            this.lblcampo.AutoSize = true;
+            this.lblcampo.Location = new System.Drawing.Point(17, 324);
+            this.lblcampo.Name = "lblcampo";
+            this.lblcampo.Size = new System.Drawing.Size(43, 13);
+            this.lblcampo.TabIndex = 9;
+            this.lblcampo.Text = "Campo:";
+            // 
+            // lblcriterio
+            // 
+            this.lblcriterio.AutoSize = true;
+            this.lblcriterio.Location = new System.Drawing.Point(213, 327);
+            this.lblcriterio.Name = "lblcriterio";
+            this.lblcriterio.Size = new System.Drawing.Size(45, 13);
+            this.lblcriterio.TabIndex = 11;
+            this.lblcriterio.Text = "Criterio: ";
+            // 
+            // lblfiltrorapido
+            // 
+            this.lblfiltrorapido.AutoSize = true;
+            this.lblfiltrorapido.Location = new System.Drawing.Point(411, 324);
+            this.lblfiltrorapido.Name = "lblfiltrorapido";
+            this.lblfiltrorapido.Size = new System.Drawing.Size(29, 13);
+            this.lblfiltrorapido.TabIndex = 12;
+            this.lblfiltrorapido.Text = "Filtro";
+            // 
+            // txtFiltrorapido
+            // 
+            this.txtFiltrorapido.Location = new System.Drawing.Point(448, 321);
+            this.txtFiltrorapido.Name = "txtFiltrorapido";
+            this.txtFiltrorapido.Size = new System.Drawing.Size(100, 20);
+            this.txtFiltrorapido.TabIndex = 15;
+            // 
+            // cbxCampo
+            // 
+            this.cbxCampo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCampo.FormattingEnabled = true;
+            this.cbxCampo.Location = new System.Drawing.Point(66, 320);
+            this.cbxCampo.Name = "cbxCampo";
+            this.cbxCampo.Size = new System.Drawing.Size(121, 21);
+            this.cbxCampo.TabIndex = 16;
+            this.cbxCampo.SelectedIndexChanged += new System.EventHandler(this.cbxCampo_SelectedIndexChanged);
+            // 
+            // cbxcriterio
+            // 
+            this.cbxcriterio.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxcriterio.FormattingEnabled = true;
+            this.cbxcriterio.Location = new System.Drawing.Point(264, 321);
+            this.cbxcriterio.Name = "cbxcriterio";
+            this.cbxcriterio.Size = new System.Drawing.Size(121, 21);
+            this.cbxcriterio.TabIndex = 17;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(834, 314);
+            this.ClientSize = new System.Drawing.Size(787, 353);
+            this.Controls.Add(this.cbxcriterio);
+            this.Controls.Add(this.cbxCampo);
+            this.Controls.Add(this.txtFiltrorapido);
+            this.Controls.Add(this.lblfiltrorapido);
+            this.Controls.Add(this.lblcriterio);
+            this.Controls.Add(this.lblcampo);
             this.Controls.Add(this.txtfiltro);
             this.Controls.Add(this.lblfiltro);
             this.Controls.Add(this.btnbuscar);
@@ -164,6 +230,12 @@ namespace Pokemon
         private System.Windows.Forms.Button btnbuscar;
         private System.Windows.Forms.Label lblfiltro;
         private System.Windows.Forms.TextBox txtfiltro;
+        private System.Windows.Forms.Label lblcampo;
+        private System.Windows.Forms.Label lblcriterio;
+        private System.Windows.Forms.Label lblfiltrorapido;
+        private System.Windows.Forms.TextBox txtFiltrorapido;
+        private System.Windows.Forms.ComboBox cbxCampo;
+        private System.Windows.Forms.ComboBox cbxcriterio;
     }
 }
 

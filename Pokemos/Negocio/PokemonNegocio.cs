@@ -138,5 +138,92 @@ namespace Negocio
                 throw ex;
             }
         }
+
+        public List<pokemon> Filtrar(string criterio, string campo, string filtrar)
+        {
+            List<pokemon> listafiltrada = new List<pokemon>();
+            ConexionBD datos = new ConexionBD();
+            try
+            {
+                string consulta = "SELECT p.Id, p.Numero, p.Nombre, p.Descripcion, p.UrlImagen, e.Descripcion as tipo, el.Descripcion as Debilidad, el.Id iddebilidad, e.Id as idtipo from POKEMONS p INNER JOIN ELEMENTOS e on p.IdTipo=e.Id INNER JOIN ELEMENTOS el on el.Id=p.IdDebilidad WHERE ";
+                switch (campo)
+                {
+                    case "Numero":
+                        switch (criterio)
+                        {
+                            case "Menor que":
+                                consulta += campo + " < " + filtrar;
+                                break;
+                            case "Igual que":
+                                consulta += campo + " = " + filtrar;
+                                break;
+                            case "Mayor que":
+                                consulta += campo + " > " + filtrar;
+                                break;
+                        }
+                        break;
+                    case "Nombre":
+                        switch (criterio)
+                        {
+                            case "Empieza con":
+                                consulta += campo + " like '" + filtrar + "%'";
+                                break;
+                            case "Termina con":
+                                consulta += campo + " like '%" + filtrar + "'";
+                                break;
+                            case "Posee":
+                                consulta += campo + " like '%" + filtrar + "%'";
+                                break;
+                        }
+                        break;
+                    case "Descripcion":
+                        switch (criterio)
+                        {
+                            case "Empieza con":
+                                consulta += "p."+campo + " like '" + filtrar + "%'";
+                                break;
+                            case "Termina con":
+                                consulta += "p."+campo + " like '%" + filtrar + "'";
+                                break;
+                            case "Posee":
+                                consulta += "p."+campo + " like '%" + filtrar + "%'";
+                                break;
+                        }
+                        break;
+                }
+                datos.SetearConsulta(consulta);
+                datos.EjecutarConsulta();
+                while (datos.lector.Read())
+                {
+                    pokemon obj = new pokemon();
+
+                    obj.Id = (int)datos.lector["Id"];
+                    obj.Numero = (int)datos.lector["Numero"];
+                    obj.Nombre = (string)datos.lector["Nombre"];
+                    obj.Descripcion = (string)datos.lector["Descripcion"];
+
+                    if (!(datos.lector["URLimagen"] is DBNull))
+                    {
+                        obj.URLImagen = (string)datos.lector["URLImagen"];
+                    }
+
+                    obj.Tipo = new Elemento();
+                    obj.Tipo.Descripcion = (string)datos.lector["Tipo"];
+                    obj.Tipo.Id = (int)datos.lector["Idtipo"];
+
+                    obj.Debilidad = new Elemento();
+                    obj.Debilidad.Descripcion = (string)datos.lector["Debilidad"];
+                    obj.Debilidad.Id = (int)datos.lector["iddebilidad"];
+
+
+                    listafiltrada.Add(obj);
+                }               
+                return listafiltrada;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
